@@ -1,7 +1,9 @@
-import Head from "next/head";
-import Image from "next/image";
+import { GetServerSideProps } from "next";
+import { redirect } from "next/dist/server/api-utils";
+import { parseCookies } from "nookies";
 import { FormEvent, useState } from "react";
 import { useSession } from "../hooks/AuthContext";
+import { withSSRGuest } from "../utils/withSSRGuest";
 import styles from "./Login.module.css";
 
 export default function Home() {
@@ -35,3 +37,9 @@ export default function Home() {
     </form>
   );
 }
+
+export const getServerSideProps = withSSRGuest(async (ctx) => {
+  return {
+    props: {},
+  };
+});
